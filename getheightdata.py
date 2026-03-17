@@ -6,7 +6,6 @@ import numpy as np
 import matplotlib.pyplot as plt
 from mpl_toolkits.mplot3d import Axes3D
 
-
 ee.Authenticate()
 
 service_account = 'greendigger@grand-solstice-352909.iam.gserviceaccount.com'
@@ -74,4 +73,21 @@ df = pd.DataFrame(rows)
 
 grid = df.pivot(index="latitude", columns="longitude", values="elevation")
 
+grid.to_csv("elevation_grid.csv")
+
 print(grid)
+
+# Prepare meshgrid
+X, Y = np.meshgrid(grid.columns, grid.index)
+Z = grid.values
+
+fig = plt.figure()
+ax = fig.add_subplot(111, projection='3d')
+
+ax.plot_surface(X, Y, Z)
+
+ax.set_xlabel("Longitude")
+ax.set_ylabel("Latitude")
+ax.set_zlabel("Elevation")
+
+plt.show()
