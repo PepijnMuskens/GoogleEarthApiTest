@@ -24,8 +24,14 @@ r_lon = 37.665329
 r_lat = -2.726999
 r_poi = ee.Geometry.Point(r_lon, r_lat)
 
-scale = 1000  # scale in meters
+roi = r_poi.buffer(500)
+
+scale = 30  # scale in meters
 
 # Print the elevation near Lyon, France.
+
+elv_list = elv.sample(roi,scale).getInfo()
+print(elv_list)
+
 elv_urban_point = elv.sample(u_poi, scale).first().get('elevation').getInfo()
 print('Ground elevation at urban point:', elv_urban_point, 'm')
