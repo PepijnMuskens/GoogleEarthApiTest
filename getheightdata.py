@@ -2,6 +2,7 @@ import ee
 import geemap
 import pandas as pd
 import numpy as np
+import CalculateMeters
 
 import matplotlib.pyplot as plt
 from mpl_toolkits.mplot3d import Axes3D
@@ -20,7 +21,6 @@ lat_min, lat_max = -2.726999, -2.713094
 lon_min, lon_max = 37.646067, 37.665329
 
 roi = ee.Geometry.Rectangle([lon_min, lat_min, lon_max, lat_max])
-
 # ----------------------------
 # 2. Create a regular grid
 # ----------------------------
