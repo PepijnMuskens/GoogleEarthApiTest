@@ -24,7 +24,7 @@ roi = ee.Geometry.Rectangle([lon_min, lat_min, lon_max, lat_max])
 # ----------------------------
 # 2. Create a regular grid
 # ----------------------------
-num_points = 50  # resolution (increase for finer grid)
+num_points = 70  # resolution (increase for finer grid) ##TODO Calculate this based on the avarage lenght of a the points needed for a 30 meter interval
 
 lats = np.linspace(lat_min, lat_max, num_points)
 lons = np.linspace(lon_min, lon_max, num_points)
@@ -73,10 +73,21 @@ df = pd.DataFrame(rows)
 
 grid = df.pivot(index="latitude", columns="longitude", values="elevation")
 
-grid.to_csv("elevation_grid.csv")
+lon0 = grid.columns[0]
+lat0 = grid.index[0]
 
+lons = []
+lats = []
+print(grid.to_numpy()[2][2])
+for lon in grid.columns:
+    t = CalculateMeters.coordinateDistance(lon0, grid.index[24], lon, grid.index[24])
+    lons.append(t)
+for lat in grid.index:
+    t = CalculateMeters.coordinateDistance(grid.index[24],lat0, grid.index[24],lat)
+    lats.append(t)
+grid.columns = lons
+grid.index = lats
 print(grid)
-
 # Prepare meshgrid
 X, Y = np.meshgrid(grid.columns, grid.index)
 Z = grid.values

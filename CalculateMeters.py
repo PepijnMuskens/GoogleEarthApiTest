@@ -23,4 +23,7 @@ def coordinateDistance(lat1, lon1, lat2, lon2):
 lat_min, lat_max = -2.726999, -2.713094
 lon_min, lon_max = 37.646067, 37.665329
 
-print(coordinateDistance(lat_min,lon_min, lat_max, lon_max))
+print(coordinateDistance(lat_max,lon_min, lat_max, lon_max) - coordinateDistance(lat_min,lon_min, lat_min, lon_max))
+
+#for i in range(89):
+    #print(f"{i}: {(coordinateDistance(i,lon_min, i, lon_max) - coordinateDistance(i+ 1,lon_min, i +1, lon_max)) /coordinateDistance(i,lon_min, i, lon_max)}")
