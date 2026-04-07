@@ -1,0 +1,4 @@
+step 1: get point of area to look at
+step 2: devide into 30 meter intervals in vertecal axis
+step 3: for each horizontal line get the interval needed to match 30 meter steps
+(remove remaining area at top to get a perfect 30 meter interval maximum 29 meters smaller )
